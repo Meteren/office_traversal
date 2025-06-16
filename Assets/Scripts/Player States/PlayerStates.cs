@@ -25,8 +25,8 @@ public class MoveState : BasePlayerState
         zDirection = Input.GetAxisRaw("Vertical");
         xDirection = Input.GetAxisRaw("Horizontal");   
 
-        pController.rb.velocity =  zDirection * speed * bodyTransform.forward + 
-            xDirection * speed * bodyTransform.right;
+        pController.rb.velocity =  (zDirection * bodyTransform.forward + 
+            xDirection * bodyTransform.right).normalized * speed;
     }
     public override void OnExit()
     {

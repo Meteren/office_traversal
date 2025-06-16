@@ -6,14 +6,16 @@ public class MoveState : BasePlayerState
 {
     float zDirection;
     float xDirection;
+    Transform bodyTransform;
 
-    float speed = 3f;
+    float speed = 5f;
     public MoveState(PlayerController p_controller) : base(p_controller)
     {
     }
     public override void OnStart()
     {
         base.OnStart();
+        bodyTransform = pController.body.transform;
     }
 
     public override void Update()
@@ -21,10 +23,10 @@ public class MoveState : BasePlayerState
         base.Update();
         Debug.Log("Move State");
         zDirection = Input.GetAxisRaw("Vertical");
-        xDirection = Input.GetAxisRaw("Horizontal");
+        xDirection = Input.GetAxisRaw("Horizontal");   
 
-        pController.rb.velocity =  zDirection * speed * pController.body.transform.forward + 
-            xDirection * speed * pController.body.transform.right;
+        pController.rb.velocity =  zDirection * speed * bodyTransform.forward + 
+            xDirection * speed * bodyTransform.right;
     }
     public override void OnExit()
     {

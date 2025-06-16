@@ -32,8 +32,11 @@ public class StateMachine
 
     public void ChangeState(IState to)
     {
-        currentState.OnExit();
+        if(currentState != null)
+            currentState.OnExit();
+
         currentState = to;
+
         currentState.OnStart();
     }
 

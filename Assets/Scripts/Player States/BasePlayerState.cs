@@ -14,17 +14,17 @@ public class BasePlayerState : IState
 
     public virtual void OnStart()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
     public virtual void OnExit()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
     public virtual void Update()
     {
-
+        return;
     }
   
 }

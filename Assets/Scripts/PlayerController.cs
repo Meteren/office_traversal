@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
         Add(moveState, inspectState, new FuncPredicate(() => inspect));
         Add(inspectState, moveState, new FuncPredicate(() => !inspect));
 
-        playerStateMachine.currentState = moveState;
+        playerStateMachine.ChangeState(moveState);
 
     }
 

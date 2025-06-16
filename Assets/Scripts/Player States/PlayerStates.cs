@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MoveState : BasePlayerState
 {
+    float zDirection;
     float xDirection;
-    float speed = 10f;
+
+    float speed = 3f;
     public MoveState(PlayerController p_controller) : base(p_controller)
     {
     }
@@ -18,9 +20,11 @@ public class MoveState : BasePlayerState
     {
         base.Update();
         Debug.Log("Move State");
-        xDirection = Input.GetAxisRaw("Vertical");
+        zDirection = Input.GetAxisRaw("Vertical");
+        xDirection = Input.GetAxisRaw("Horizontal");
 
-        pController.rb.velocity =  xDirection * speed * pController.body.transform.forward;
+        pController.rb.velocity =  zDirection * speed * pController.body.transform.forward + 
+            xDirection * speed * pController.body.transform.right;
     }
     public override void OnExit()
     {

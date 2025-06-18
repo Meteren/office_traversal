@@ -9,13 +9,19 @@ public class PlayerController : MonoBehaviour
     [Header("Conditions")]
     [SerializeField] private bool inspect;
 
+    [Header("Minimap Event Listener")]
+    [SerializeField] private EventListener miniMapEventListener;
+
+    [Header("Body")]
     public Transform body;
 
-    public Rigidbody rb;
+    [HideInInspector] public Rigidbody rb;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         InitStateMachine();
+
+        miniMapEventListener.AddEvent(HandleInspect);
 
         var moveState = new MoveState(this);
         var inspectState = new InspectState(this);
@@ -26,6 +32,8 @@ public class PlayerController : MonoBehaviour
         playerStateMachine.ChangeState(moveState);
 
     }
+
+    public void HandleInspect() => inspect = !inspect;
 
 
     private void Add(IState from, IState to, IPredicate predicate)

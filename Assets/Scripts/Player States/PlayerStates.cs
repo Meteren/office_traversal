@@ -41,18 +41,19 @@ public class InspectState : BasePlayerState
     {
     }
 
+    public override void OnStart()
+    {
+        base.OnStart();
+        
+    }
+    public override void Update()
+    {
+        base.Update();
+        pController.rb.velocity = Vector3.zero;
+    }
     public override void OnExit()
     {
         base.OnExit();
     }
 
-    public override void OnStart()
-    {
-        base.OnStart();
-    }
-
-    public override void Update()
-    {
-        base.Update();
-    }
 }

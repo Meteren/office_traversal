@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,6 +14,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
     [Header("Minimap Cam")]
     [SerializeField] private Camera miniMapCam;
+
     [Header("Hit Mask")]
     [SerializeField] private LayerMask layersToHit;
 
@@ -31,6 +34,11 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
     [SerializeField] private Vector2 xBoundaries;
     [SerializeField] private Vector2 zBoundaries;
     [SerializeField] private BoxCollider boundary;
+
+    [Header("Ray Adjustments")]
+    [SerializeField] private float rayOffset;
+    [SerializeField] private LayerMask rayLayer;
+
     void Start()
     {
         miniMapEventListener.AddEvent(OnActivation);
@@ -68,7 +76,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
                     AdjustMinimapMovement();
                 }
             }
-
+            
         }
 
         
@@ -97,7 +105,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
             miniMapCamPos.y, miniMapCamPos.z -= directionZ * traversalSpeed);
 
         Vector3 boundaryCenter = boundary.transform.position;
-        Debug.Log($"Boundary Center Position:{boundaryCenter}");
+        //Debug.Log($"Boundary Center Position:{boundaryCenter}");
         Vector3 bounds = boundary.size;
         Vector2 xAxis = new Vector2(boundaryCenter.x + bounds.x / 2, boundaryCenter.x - bounds.x / 2);
         Vector2 zAxis = new Vector2(boundaryCenter.z + bounds.z / 2, boundaryCenter.z - bounds.z / 2);
@@ -127,23 +135,27 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
     {    
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(minimapRect, eventData.position, null, out localPoint);
-        Debug.Log($"Clicked: {localPoint}");
+        //Debug.Log($"Clicked: {localPoint}");
 
         Vector2 clickPosition = GetMinimapCamClickPos(localPoint);
 
-        Debug.Log($"Click Position:{clickPosition}");
+        //Debug.Log($"Click Position:{clickPosition}");
 
         if (Input.GetMouseButtonDown(0)) 
         {
             if (GetPositionToMoveIfPossible(clickPosition, out Vector3 positionToMove))
             {
-                Vector3 finalPos = new Vector3(positionToMove.x, positionToMove.y + playerController.body.GetComponent<Collider>().bounds.size.y / 2, positionToMove.z);
-                Debug.Log($"Final pos: {finalPos}");
+                Vector3 position = new Vector3(positionToMove.x, positionToMove.y + playerController.body.GetComponent<Collider>().bounds.size.y / 2, positionToMove.z);
+                //Debug.Log($"Final pos: {position}");
+
+                MoveAwayFromObstaclesIfNeeded(position,out Vector3 finalPosition);
 
                 GameObject go = new GameObject("Hit Point");
-                go.transform.position = finalPos;
+                go.transform.position = position;
 
-                playerController.rb.position = new Vector3(positionToMove.x, positionToMove.y + playerController.body.GetComponent<Collider>().bounds.size.y / 2, positionToMove.z);
+                Debug.Log($"Position Before: {position} -- Position After: {finalPosition}");
+
+                playerController.rb.position = finalPosition;
 
             }
             else
@@ -172,14 +184,65 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layersToHit, QueryTriggerInteraction.Ignore))
         {
-            Debug.Log($"Ray hitted on position:{hit.point}");
-            positionToMove = hit.point;
-            return true;
+            //Debug.Log($"Ray hitted on position:{hit.point}");
+            if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Floor"))
+            {
+                positionToMove = hit.point;
+                return true;
+            }
+                
         }
         positionToMove = default;
         return false;
+    }
+
+    private void MoveAwayFromObstaclesIfNeeded(Vector3 positionBefore,out Vector3 finalPosition)
+    {
+        List<Vector3> directions = new List<Vector3>();
+        float radius = playerController.GetComponentInChildren<CapsuleCollider>().radius;
+
+        Vector3 xAxisPos = new Vector3(positionBefore.x + radius + rayOffset, positionBefore.y, positionBefore.z);
+        Vector3 zAxisPos = new Vector3(positionBefore.x, positionBefore.y, positionBefore.z + radius + rayOffset);
+
+        Vector3 directionX = (xAxisPos - positionBefore);
+        Vector3 directionZ = (zAxisPos - positionBefore);
+
+        directions.Add(directionX);
+        directions.Add(directionX * -1);
+        directions.Add(directionZ);
+        directions.Add(directionZ * -1);
+
+        finalPosition = positionBefore; 
+
+        foreach(var direction in directions)
+        {
+            Debug.Log($"Direction: {direction}");
+            Ray ray = new Ray(positionBefore, direction);
+            VisualizeRay(positionBefore, direction);
+            if (Physics.Raycast(ray,out RaycastHit hit, radius, rayLayer, QueryTriggerInteraction.Ignore))
+            {
+                Debug.Log("Obstacle Detected");
+                float delta = radius - hit.distance;
+                Debug.Log($"Hit Delta: {delta}");
+                if(direction.z == 0)
+                {
+                    Debug.Log("X obstacle");
+                    finalPosition -= new Vector3(delta * (direction.x > 0 ? 1 : -1), 0, 0);
+                }                 
+                                            
+                if(direction.x == 0)
+                {
+                    Debug.Log("Z obstacle");
+                    finalPosition -= new Vector3(0, 0, delta * (direction.z > 0 ? 1 : -1));
+                }
+                    
+            }
+        }
 
     }
+
+    private void VisualizeRay(Vector3 origin, Vector3 direction) => Debug.DrawRay(origin, direction, Color.red, 20f);
+
 
     private void SetAnimator()
     {

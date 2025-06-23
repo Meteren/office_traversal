@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Rigidbody rb;
     void Start()
     {
+        
         rb = GetComponent<Rigidbody>();
         InitStateMachine();
 

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class MoveState : BasePlayerState
@@ -8,7 +7,7 @@ public class MoveState : BasePlayerState
     float xDirection;
     Transform bodyTransform;
 
-    float speed = 5f;
+    float speed = 10f;
     public MoveState(PlayerController p_controller) : base(p_controller)
     {
     }

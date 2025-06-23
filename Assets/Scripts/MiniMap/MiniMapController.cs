@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -29,6 +28,9 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
     [SerializeField] private float minSValue;
     [SerializeField] private float maxSValue;
 
+    private float offsettedMinSValue;
+    private float offsettedMaxSValue;   
+
     [Header("Minimap Traversal Adjustments")]
     [SerializeField] private float traversalSpeed;
     [SerializeField] private Vector2 xBoundaries;
@@ -49,10 +51,13 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
     private void Update()
     {
         SetAnimator();
+        SetZoomBoundaries();
 
         if (Input.GetKeyDown(KeyCode.Tab) && !inMovement)
         {
             inMovement = true;
+            MiniMapCam miniMC = miniMapCam.GetComponent<MiniMapCam>();
+            miniMC.MiniMapCamConstantPosY = miniMapCam.transform.position.y;    
             miniMapEventListener.eventController.ExecuteListeners();
         }
 
@@ -82,14 +87,22 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
         
     }
 
+    private void SetZoomBoundaries()
+    {
+        offsettedMinSValue = minSValue + playerController.transform.position.y;
+        offsettedMaxSValue = maxSValue + playerController.transform.position.y;
+    }
+
     private void AdjustMinimapScroll()
     {
         float delta = Input.GetAxis("Mouse ScrollWheel");
 
         if (delta != 0)
         {
-            miniMapCam.fieldOfView -= delta * scrollSpeed;
-            miniMapCam.fieldOfView = Mathf.Clamp(miniMapCam.fieldOfView, minSValue, maxSValue);
+            Vector3 miniMapCamPos = miniMapCam.transform.position;
+            miniMapCamPos.y -= delta * scrollSpeed;
+            miniMapCamPos.y = Mathf.Clamp(miniMapCamPos.y, offsettedMinSValue, offsettedMaxSValue);
+            miniMapCam.transform.position = miniMapCamPos;
         }
        
     }
@@ -145,7 +158,9 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
         {
             if (GetPositionToMoveIfPossible(clickPosition, out Vector3 positionToMove))
             {
-                Vector3 position = new Vector3(positionToMove.x, positionToMove.y + playerController.body.GetComponent<Collider>().bounds.size.y / 2, positionToMove.z);
+                float bodyHeight = playerController.body.GetComponent<Collider>().bounds.size.y / 2;
+                float playerYOffset = bodyHeight + (playerController.transform.position.y - playerController.body.position.y);
+                Vector3 position = new Vector3(positionToMove.x, positionToMove.y + playerYOffset, positionToMove.z);
                 //Debug.Log($"Final pos: {position}");
 
                 MoveAwayFromObstaclesIfNeeded(position,out Vector3 finalPosition);

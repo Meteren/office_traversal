@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MiniMapCam : MonoBehaviour
@@ -7,14 +5,17 @@ public class MiniMapCam : MonoBehaviour
     [Header("Player Controller")]
     [SerializeField] private PlayerController pController;
 
-
     [Header("Minimap Event Listener")]
     [SerializeField] private EventListener miniMapEventListener;
 
-
     [Header("Conditions")]
     [SerializeField] private bool miniMapEnabled;
+    [SerializeField] private bool init;
 
+    [Header("Constant Position")]
+    [SerializeField] private float miniMapCamConstantPosY;
+
+    public float MiniMapCamConstantPosY { get { return miniMapCamConstantPosY; } set {  miniMapCamConstantPosY = value; } }
 
     private void Start()
     {
@@ -22,9 +23,25 @@ public class MiniMapCam : MonoBehaviour
     }
     private void Update()
     {
-        if(!miniMapEnabled)
-            transform.position = new Vector3(pController.transform.position.x, transform.position.y, pController.transform.position.z);   
+        if (!miniMapEnabled)
+        {
+            if (init)
+            {
+                init = false;
+                miniMapCamConstantPosY -= pController.transform.position.y;
+            }
+            transform.position = 
+                new Vector3(pController.transform.position.x, 
+                miniMapCamConstantPosY + pController.transform.position.y, pController.transform.position.z);
+        }
+
+               
     }
 
-    private void HandleMiniMapCondition() => miniMapEnabled = !miniMapEnabled;
+    private void HandleMiniMapCondition()
+    {
+        miniMapEnabled = !miniMapEnabled;
+        if(!init)
+            init = true;
+    } 
 }

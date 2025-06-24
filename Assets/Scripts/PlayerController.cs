@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,10 +15,26 @@ public class PlayerController : MonoBehaviour
     public Transform body;
 
     [HideInInspector] public Rigidbody rb;
+
+    [Header("Stair Detection Adjustments")]
+    [SerializeField] private Transform bottom;
+    [SerializeField] private Transform top;
+    [SerializeField] private float bottomDistance;
+    [SerializeField] private float topDistance;
+    [SerializeField] private LayerMask layer;
+    [SerializeField] private float climbPower;
+
+    List<Vector3> directions;
+
     void Start()
     {
-        
+        directions = new List<Vector3>() {transform.TransformDirection(0,0,1),
+            transform.TransformDirection(-0.7f,0,0.7f),transform.TransformDirection(0.7f,0,0.7f),transform.TransformDirection(-1,0,0),
+            transform.TransformDirection(-0.7f,0,-0.7f),transform.TransformDirection(0,0,-1),transform.TransformDirection(0.7f,0,-0.7f),
+            transform.TransformDirection(1,0,0)};
+
         rb = GetComponent<Rigidbody>();
+
         InitStateMachine();
 
         miniMapEventListener.AddEvent(HandleInspect);
@@ -33,6 +48,12 @@ public class PlayerController : MonoBehaviour
         playerStateMachine.ChangeState(moveState);
 
     }
+    void Update()
+    {
+        playerStateMachine.Update();
+        if(rb.velocity != Vector3.zero)
+            ClimbIfPossible();
+    }
 
     public void HandleInspect() => inspect = !inspect;
 
@@ -41,14 +62,37 @@ public class PlayerController : MonoBehaviour
     {
         playerStateMachine.AddTransition(from, to, predicate);  
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        playerStateMachine.Update();    
-    }
+ 
     private void InitStateMachine()
     {
         playerStateMachine = new StateMachine();
     }
+
+    private void ClimbIfPossible()
+    {
+        foreach(var direction in directions)
+        {
+
+            VisualizeDirection(bottom.transform.position, direction,bottomDistance);
+            VisualizeDirection(top.transform.position, direction,topDistance);
+
+            Ray rayBottom = new Ray(bottom.transform.position,direction);
+            Ray rayTop = new Ray(top.transform.position, direction);
+
+            if (Physics.Raycast(rayBottom,bottomDistance,layer,QueryTriggerInteraction.Ignore))
+            {
+                Debug.Log($"Direction {direction} hit.");
+                if(!Physics.Raycast(rayTop, topDistance, layer, QueryTriggerInteraction.Ignore))
+                {
+                    ClimbObstacle();
+                    break;
+                }
+            }
+        }
+       
+    }
+    private void VisualizeDirection(Vector3 origin, Vector3 direction,float distance) => Debug.DrawRay(origin, direction * distance);
+
+    private void ClimbObstacle() =>
+        rb.position = new Vector3(transform.position.x, transform.position.y +  climbPower, transform.position.z);
 }

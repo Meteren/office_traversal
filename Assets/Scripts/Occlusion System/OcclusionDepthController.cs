@@ -29,7 +29,8 @@ public class OcclusionDepthController : MonoBehaviour
     {
         Vector3 screenPos = miniMapCam.WorldToScreenPoint(playerController.transform.position);
         Ray ray = miniMapCam.ScreenPointToRay(screenPos);
-        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, layer, QueryTriggerInteraction.Ignore);
+        float distance = Vector3.Distance(playerController.transform.position, miniMapCam.transform.position);
+        RaycastHit[] hits = Physics.RaycastAll(ray, distance, layer, QueryTriggerInteraction.Ignore);
 
         List<OccludableObject> listedOccludables = hits
             .Select(x =>
@@ -40,13 +41,9 @@ public class OcclusionDepthController : MonoBehaviour
             .Where(o => o != null)
             .ToList();
 
-        if (hits.Length != 0)
-        {
-            AddOccludables(listedOccludables);
-            RemoveOccludables(listedOccludables);
-        }
-
-
+        AddOccludables(listedOccludables);
+        RemoveOccludables(listedOccludables);
+ 
     }
     private void AddOccludables(List<OccludableObject> listedOccludables)
     {

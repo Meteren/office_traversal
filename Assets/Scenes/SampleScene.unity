@@ -714,7 +714,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3229,6 +3229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0066240ff58390444a59be308f9fbfea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 2
 --- !u!1 &1103691754
 GameObject:
   m_ObjectHideFlags: 0
@@ -3846,6 +3847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0066240ff58390444a59be308f9fbfea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 2
 --- !u!65 &1407211342
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5385,6 +5387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0066240ff58390444a59be308f9fbfea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 2
 --- !u!1 &2015067518
 GameObject:
   m_ObjectHideFlags: 0

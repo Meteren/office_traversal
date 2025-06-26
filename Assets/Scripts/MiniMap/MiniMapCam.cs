@@ -21,7 +21,8 @@ public class MiniMapCam : MonoBehaviour
     {
         miniMapEventListener.AddEvent(HandleMiniMapCondition);
         Camera cam = GetComponent<Camera>();
-        cam.transparencySortMode = TransparencySortMode.Orthographic;
+        cam.clearFlags = CameraClearFlags.SolidColor;
+        cam.backgroundColor = new Color(0, 0, 0, 0);
     }
     private void Update()
     {

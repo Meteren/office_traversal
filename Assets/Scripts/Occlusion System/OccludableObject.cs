@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class OccludableObject : MonoBehaviour
 {
-    // Start is called before the first frame update
     private MeshRenderer objectRenderer;
     [SerializeField] private float fadeSpeed;
     private float alphaValue = 1;

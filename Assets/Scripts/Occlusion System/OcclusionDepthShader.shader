@@ -7,10 +7,10 @@ Shader "Unlit/OcclusionDepthShader"
     }
     SubShader
     {
-        Tags { "RenderPipeline" = "UniversalPipeline" "RenderType" = "Transparent" "Queue" = "Transparent" }
+        Tags { "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" "Queue" = "Transparent" }
         LOD 100
 
-        Blend SrcAlpha OneMinusSrcAlpha
+        Blend One OneMinusSrcAlpha
 
         ZWrite Off
         //ZTest Always
@@ -57,7 +57,9 @@ Shader "Unlit/OcclusionDepthShader"
                     col.a = 
                 }*/
 
-                col.a *= saturate(_AlphaValue);
+                col.rgb *= col.a * _AlphaValue;
+
+                col.a = _AlphaValue;
 
                 return col; 
             }

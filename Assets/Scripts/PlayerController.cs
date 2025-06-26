@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     private void Add(IState from, IState to, IPredicate predicate)
     {
-        playerStateMachine.AddTransition(from, to, predicate);  
+        playerStateMachine.AddTransition(from, to, predicate);
     }
  
     private void InitStateMachine()
@@ -94,5 +94,5 @@ public class PlayerController : MonoBehaviour
     private void VisualizeDirection(Vector3 origin, Vector3 direction,float distance) => Debug.DrawRay(origin, direction * distance);
 
     private void ClimbObstacle() =>
-        rb.position = new Vector3(transform.position.x, transform.position.y +  climbPower, transform.position.z);
+        rb.position = new Vector3(transform.position.x, transform.position.y + climbPower, transform.position.z);
 }

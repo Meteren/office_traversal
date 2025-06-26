@@ -20,6 +20,8 @@ public class MiniMapCam : MonoBehaviour
     private void Start()
     {
         miniMapEventListener.AddEvent(HandleMiniMapCondition);
+        Camera cam = GetComponent<Camera>();
+        cam.transparencySortMode = TransparencySortMode.Orthographic;
     }
     private void Update()
     {

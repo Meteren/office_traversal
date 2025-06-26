@@ -6,20 +6,39 @@ public class OccludableObject : MonoBehaviour
 {
     // Start is called before the first frame update
     private MeshRenderer objectRenderer;
+    [SerializeField] private float fadeSpeed;
+    private float alphaValue = 1;
+    bool isObstructing;
     void Start()
     {
-        objectRenderer = GetComponent<MeshRenderer>();  
+        objectRenderer = GetComponent<MeshRenderer>();    
+
     }
- 
-    public void SetMaterial(bool isObstructing)
+    private void Update()
     {
         MaterialPropertyBlock block = new MaterialPropertyBlock();
-        
+
         objectRenderer.GetPropertyBlock(block);
 
-        block.SetInt("_PlayerObstructed", isObstructing ? 1 : 0);
+        block.SetFloat("_AlphaValue", GetAlphaValue(isObstructing));
 
-        objectRenderer.SetPropertyBlock(block); 
+        objectRenderer.SetPropertyBlock(block);
 
+    }
+
+    public void SetMaterial(bool isObstructing) =>
+        this.isObstructing = isObstructing;
+
+
+    float GetAlphaValue(bool isObstructing)
+    {
+        if (isObstructing)
+            alphaValue -= Time.deltaTime * fadeSpeed;
+        else
+            alphaValue += Time.deltaTime * fadeSpeed;
+
+        alphaValue = Mathf.Clamp01(alphaValue); 
+
+        return alphaValue;
     }
 }

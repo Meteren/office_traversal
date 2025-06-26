@@ -53,10 +53,6 @@ Shader "Unlit/OcclusionDepthShader"
                 
                 float4 col = SAMPLE_TEXTURE2D(_MainTex,sampler_MainTex, i.uv);
                
-                /*if(_PlayerObstructed == 1){
-                    col.a = 
-                }*/
-
                 col.rgb *= col.a * _AlphaValue;
 
                 col.a = _AlphaValue;

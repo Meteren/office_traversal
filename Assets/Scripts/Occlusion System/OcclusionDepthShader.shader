@@ -3,7 +3,7 @@ Shader "Custom/OcclusionDepthShader"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _AlphaValue("Texture",float) = 1
+        _AlphaValue("Alpha Value",float) = 1
         _ClipShadows("Clip Shadows",int) = 0
     }
     SubShader
@@ -31,6 +31,7 @@ Shader "Custom/OcclusionDepthShader"
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
 
             TEXTURE2D(_MainTex); SAMPLER(sampler_MainTex);
 
@@ -71,24 +72,19 @@ Shader "Custom/OcclusionDepthShader"
 
                 col.a = _AlphaValue;
 
-                InputData light = (InputData)0;
+              
+                SurfaceData surfaceData;
+                InitializeStandardLitSurfaceData(i.uv, surfaceData);
+         
                 
-                light.positionWS = i.positionWS;
-                light.normalWS = normalize(i.normalWS);
-                light.viewDirectionWS = GetWorldSpaceViewDir(i.positionWS);
-                light.shadowCoord = TransformWorldToShadowCoord(i.positionWS);
-                light.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(i.positionCS);
-
-                SurfaceData surfaceData = (SurfaceData)0;
-
-                surfaceData.albedo = col.rgb;
-                surfaceData.alpha = col.a;
-                surfaceData.occlusion = 0;
-                surfaceData.smoothness = 0;
-                surfaceData.specular = 0;
+                InputData inputData = (InputData)0;
+                inputData.positionWS = i.positionWS;
+                inputData.normalWS = normalize(i.normalWS);
+                inputData.viewDirectionWS = GetWorldSpaceViewDir(i.positionWS);
+                inputData.shadowCoord = TransformWorldToShadowCoord(i.positionWS);
 
                
-                return UniversalFragmentPBR(light,surfaceData); 
+                return UniversalFragmentPBR(inputData, surfaceData);
             }
             ENDHLSL
         }

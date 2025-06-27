@@ -26,6 +26,7 @@ public class MiniMapCam : MonoBehaviour
     }
     private void Update()
     {
+
         if (!miniMapEnabled)
         {
             if (init)

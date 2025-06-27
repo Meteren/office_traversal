@@ -15,7 +15,7 @@ public class OcclusionDepthController : MonoBehaviour
     private void Start()
     {
         listener.AddEvent(HandleExecution);
-        miniMapCam = GameObject.Find("MiniMapCam").GetComponent<Camera>();
+        miniMapCam = GameObject.Find("MiniMapCamera").GetComponent<Camera>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
     }

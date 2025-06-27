@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float climbPower;
 
     List<Vector3> directions;
-
     void Start()
     {
         directions = new List<Vector3>() {transform.TransformDirection(0,0,1),
@@ -56,7 +55,6 @@ public class PlayerController : MonoBehaviour
     }
 
     public void HandleInspect() => inspect = !inspect;
-
 
     private void Add(IState from, IState to, IPredicate predicate)
     {

@@ -120,8 +120,11 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
         Vector3 boundaryCenter = boundary.transform.position;
         //Debug.Log($"Boundary Center Position:{boundaryCenter}");
         Vector3 bounds = boundary.size;
+        Debug.Log($"Boundary Size:{bounds} ");
         Vector2 xAxis = new Vector2(boundaryCenter.x + bounds.x / 2, boundaryCenter.x - bounds.x / 2);
         Vector2 zAxis = new Vector2(boundaryCenter.z + bounds.z / 2, boundaryCenter.z - bounds.z / 2);
+
+        Debug.Log($"xAxis: {xAxis} - yAxis: {zAxis}");
 
         movementVector.x = Mathf.Clamp(movementVector.x, xAxis.y, xAxis.x);
         movementVector.z = Mathf.Clamp(movementVector.z, zAxis.y, zAxis.x);

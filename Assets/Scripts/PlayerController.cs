@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
                 if(!Physics.Raycast(rayTop, topDistance, layer, QueryTriggerInteraction.Ignore))
                 {
                     ClimbObstacle();
+                    Debug.Log("Climbing");
                     break;
                 }
             }

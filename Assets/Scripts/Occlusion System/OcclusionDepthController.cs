@@ -8,7 +8,7 @@ public class OcclusionDepthController : MonoBehaviour
     private Camera miniMapCam;
     [SerializeField] private LayerMask layer;
     private MeshRenderer meshRenderer;
-    private List<OccludableObject> occludables = new List<OccludableObject>();
+    [HideInInspector]public List<OccludableObject> occludables = new List<OccludableObject>();
     [SerializeField] private EventListener listener;
     private bool lockExecution = false;
 

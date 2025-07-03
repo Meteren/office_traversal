@@ -15,6 +15,9 @@ public class MinimapCamRenderController : MonoBehaviour
     [SerializeField] private Material fadeMaterial;
     [SerializeField] private Material defaultMaterial;
 
+    [Header("MiniMap Controller")]
+    [SerializeField] private MiniMapController miniMapController;
+
     private void OnEnable()
     {
         RenderPipelineManager.beginCameraRendering += OnBeginCameraRendering;
@@ -30,11 +33,23 @@ public class MinimapCamRenderController : MonoBehaviour
 
     private void OnBeginCameraRendering(ScriptableRenderContext context, Camera camera)
     {
+
         if(camera.name == cameraName && objectsToBeEffected.Count != 0)
         {
-            foreach(var obj in objectsToBeEffected)
+            if (miniMapController.ShouldOpenMap)
             {
-                obj.GetComponent<Renderer>().material = fadeMaterial;
+                foreach (var obj in objectsToBeEffected)
+                {
+                    obj.GetComponent<Renderer>().material = defaultMaterial;
+                }
+            }
+            else
+            {
+                foreach (var obj in objectsToBeEffected)
+                {
+                    obj.GetComponent<Renderer>().material = fadeMaterial;
+                }
+
             }
         }
             

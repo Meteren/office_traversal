@@ -1,15 +1,19 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MiniMapController : MonoBehaviour, IPointerDownHandler
 {
     RectTransform minimapRect;
     Animator miniMapAnim;
+    int buttonSelected;
 
     [Header("Conditions")]
     [SerializeField] private bool shouldOpenMap;
     [SerializeField] private bool inMovement;
+    [SerializeField] private bool initUI;
 
     [Header("Minimap Cam")]
     [SerializeField] private Camera miniMapCam;
@@ -29,7 +33,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
     [SerializeField] private float maxSValue;
 
     private float offsettedMinSValue;
-    private float offsettedMaxSValue;   
+    private float offsettedMaxSValue;
 
     [Header("Minimap Traversal Adjustments")]
     [SerializeField] private float traversalSpeed;
@@ -40,6 +44,13 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
     [Header("Ray Adjustments")]
     [SerializeField] private float rayOffset;
     [SerializeField] private LayerMask rayLayer;
+
+    [Header("Floor Control Section")]
+    [SerializeField] private List<Button> floorButtons;
+    [SerializeField] private OcclusionDepthController occlusionDepthController;
+    public int floorIndex;
+
+    public bool ShouldOpenMap { get { return shouldOpenMap; } }
 
     void Start()
     {
@@ -55,6 +66,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
         if (Input.GetKeyDown(KeyCode.Tab) && !inMovement)
         {
+            initUI = true;
             inMovement = true;
             MiniMapCam miniMC = miniMapCam.GetComponent<MiniMapCam>();
             miniMC.MiniMapCamConstantPosY = miniMapCam.transform.position.y;    
@@ -70,9 +82,19 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
             if (stateInfo.normalizedTime >= 1)
                 inMovement = false;
 
+        SetButtonsState(shouldOpenMap);
+
         if (shouldOpenMap)
         {
+            if (initUI)
+            {
+                buttonSelected = floorIndex;
+                Debug.Log($"Button index:{buttonSelected}");
+                SetMiniMapState(buttonSelected);
+                initUI = false;
+            }
             AdjustMinimapScroll();
+            SetFloorUI();
 
             if (IsInsideMinimapArea())
             {
@@ -84,7 +106,8 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
             
         }
 
-        
+       
+     
     }
 
     private void SetZoomBoundaries()
@@ -145,6 +168,8 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
     {
         Cursor.lockState = shouldOpenMap ? CursorLockMode.Locked : CursorLockMode.None;
         shouldOpenMap = !shouldOpenMap;
+        if (!shouldOpenMap)
+            SetLayersToDefault();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -180,11 +205,9 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
             {
                 UIManager.instance.ShowIndicator("Bu bölgeye gidilemiyor.");
             }
-        }
-       
+        }     
        
     }
-
     private Vector2 GetMinimapCamClickPos(Vector2 point)
     {
 
@@ -200,7 +223,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
     {
         Ray ray = miniMapCam.ScreenPointToRay(clickPos);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layersToHit, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layersToHit, QueryTriggerInteraction.Collide))
         {
             //Debug.Log($"Ray hitted on position:{hit.point}");
             if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Floor"))
@@ -267,5 +290,74 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
         miniMapAnim.SetBool("shouldOpenMap", shouldOpenMap);
     }
 
-  
+    private void SetButtonsState(bool state)
+    {
+        foreach(var button in floorButtons)
+            button.gameObject.SetActive(state);
+
+    }
+
+    private void SetFloorUI()
+    {
+        
+        for (int i = 0; i < floorButtons.Count; i++)
+        {
+            Image buttonImage = floorButtons[i].GetComponent<Image>();
+            if (i == buttonSelected)
+                buttonImage.color = Color.red;
+            else
+                buttonImage.color = Color.white;
+        }             
+        
+    }
+
+    public void SetMiniMapState(int index)
+    {
+        buttonSelected = index;
+        LevelData currentLevelData = GameObject.FindAnyObjectByType<LevelData>();
+
+        for (int i = 0; i <= index; i++)
+        {
+            Debug.Log("Fired");
+            GameObject floor = currentLevelData.floors[i];
+            floor.layer = LayerMask.NameToLayer("Default");
+            for (int j = 0; j < floor.transform.childCount; j++ )
+            {
+                GameObject child = floor.transform.GetChild(j).gameObject;
+
+                child.layer = LayerMask.NameToLayer("Floor");
+            }
+        }
+
+       for (int i = index + 1; i < currentLevelData.floors.Count; i++)
+        {
+            GameObject floor = currentLevelData.floors[i];
+            floor.layer = LayerMask.NameToLayer("Hidden");
+            for (int j = 0; j < floor.transform.childCount; j++)
+            {
+                GameObject child = floor.transform.GetChild(j).gameObject;
+
+                child.layer = LayerMask.NameToLayer("Hidden");
+            }
+        }
+
+      
+    }
+
+    private void SetLayersToDefault()
+    {
+        LevelData currentLevelData = GameObject.FindAnyObjectByType<LevelData>();
+        for (int i = 0; i < currentLevelData.floors.Count; i++)
+        {  
+            GameObject floor = currentLevelData.floors[i];
+            floor.layer = LayerMask.NameToLayer("Default");
+            for (int j = 0; j < floor.transform.childCount; j++)
+            {
+                GameObject child = floor.transform.GetChild(j).gameObject;
+
+                child.layer = LayerMask.NameToLayer("Default");
+            }
+        }
+    }
+
 }

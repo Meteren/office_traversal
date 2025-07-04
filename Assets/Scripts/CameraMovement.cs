@@ -18,6 +18,12 @@ public class CameraMovement : MonoBehaviour
     [Header("Conditions")]
     [SerializeField] private bool canCameraMove;
 
+    [Header("Game State Listener")]
+    [SerializeField] private EventListener gameStateListener;
+
+    [Header("Map Deactivation Listener On Select Screen")]
+    [SerializeField] private EventListener deactivationListener;
+
     float xRotation;
     float yRotation;
 
@@ -25,28 +31,34 @@ public class CameraMovement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         miniMapEventListener.AddEvent(HandleCamera);
+        gameStateListener.AddEvent(HandleCamera);
+
     }
 
     void Update()
     {
         if (canCameraMove)
         {
-            float xAxis = Input.GetAxis("Mouse X");
-            float yAxis = Input.GetAxis("Mouse Y");
+            if (!GameManager.instance.gamePaused)
+            {
+                float xAxis = Input.GetAxis("Mouse X");
+                float yAxis = Input.GetAxis("Mouse Y");
 
-            //Debug.Log($"X-Axis:{xAxis} - Y-Axis:{yAxis}");
+                //Debug.Log($"X-Axis:{xAxis} - Y-Axis:{yAxis}");
 
-            xRotation += -1 * yAxis * sensitivity;
+                xRotation += -1 * yAxis * sensitivity;
 
-            //Debug.Log($"x angle:{xRotation}");
+                //Debug.Log($"x angle:{xRotation}");
 
-            xRotation = ClampXAxis(xRotation);
+                xRotation = ClampXAxis(xRotation);
 
-            yRotation += xAxis * sensitivity;
+                yRotation += xAxis * sensitivity;
 
-            transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
+                transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
 
-            player.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+                player.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+            }
+           
         }    
         
     }

@@ -6,15 +6,20 @@ public class OcclusionDepthController : MonoBehaviour
 {
     private PlayerController playerController;
     private Camera miniMapCam;
+    [Header("Layer Mask")]
     [SerializeField] private LayerMask layer;
     private MeshRenderer meshRenderer;
     [HideInInspector]public List<OccludableObject> occludables = new List<OccludableObject>();
+    [Header("Map Activation Listener")]
     [SerializeField] private EventListener listener;
+    [Header("Map Deactivation Listener On Select Screen")]
+    [SerializeField] private EventListener deactivationListener;
     private bool lockExecution = false;
 
     private void Start()
     {
         listener.AddEvent(HandleExecution);
+        deactivationListener.AddEvent(HandleExecution);
         miniMapCam = GameObject.Find("MiniMapCamera").GetComponent<Camera>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 

@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     [Header("Minimap Event Listener")]
     [SerializeField] private EventListener miniMapEventListener;
 
+    [Header("Game State Listener")]
+    [SerializeField] private EventListener gameStateListener;
+
     [Header("Body")]
     public Transform body;
 
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
         InitStateMachine();
 
         miniMapEventListener.AddEvent(HandleInspect);
+        gameStateListener.AddEvent(HandleInspect);
 
         var moveState = new MoveState(this);
         var inspectState = new InspectState(this);

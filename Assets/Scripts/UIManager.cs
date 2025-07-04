@@ -4,11 +4,50 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
+    [Header("Indicator")]
     public TextMeshProUGUI indicator;
+
+    [Header("Selection Screen")]
+    public GameObject selectionScreen;
 
     [Header("Text Timer")]
     [SerializeField] private float timer;
 
+    [Header("Game State Listener")]
+    [SerializeField] private EventListener gameStateListener;
+
+    [Header("Minimap Controller")]
+    [SerializeField] private MiniMapController miniMapController;
+
+    [Header("Minimap Cam")]
+    [SerializeField] private MiniMapCam miniMapCam;
+
+    [Header("Map Deactivation Listener On Select Screen")]
+    [SerializeField] private EventListener deactivationListener;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !miniMapController.inMovement)
+        {
+                     
+            GameManager.instance.gamePaused = !GameManager.instance.gamePaused;
+            if (miniMapController.ShouldOpenMap)
+            {
+                miniMapCam.MiniMapCamConstantPosY = miniMapCam.transform.position.y;
+                deactivationListener.eventController.ExecuteListeners();
+                Cursor.lockState = CursorLockMode.None;
+
+            }
+            else
+            {
+                gameStateListener.eventController.ExecuteListeners();
+            }
+           
+            selectionScreen.SetActive(GameManager.instance.gamePaused);      
+                
+        }
+       
+    }
 
     public void ShowIndicator(string text)
     {

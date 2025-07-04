@@ -12,7 +12,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
     [Header("Conditions")]
     [SerializeField] private bool shouldOpenMap;
-    [SerializeField] private bool inMovement;
+    public bool inMovement;
     [SerializeField] private bool initUI;
 
     [Header("Minimap Cam")]
@@ -26,6 +26,10 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
     [Header("Minimap Event Listener")]
     [SerializeField] private EventListener miniMapEventListener;
+
+    [Header("Map Deactivation Listener On Select Screen")]
+    [SerializeField] private EventListener deactivationListener;
+
 
     [Header("Minimap Scroll Adjustments")]
     [SerializeField] private float scrollSpeed;
@@ -50,11 +54,13 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
     [SerializeField] private OcclusionDepthController occlusionDepthController;
     public int floorIndex;
 
+
     public bool ShouldOpenMap { get { return shouldOpenMap; } }
 
     void Start()
     {
-        miniMapEventListener.AddEvent(OnActivation);
+        miniMapEventListener.AddEvent(ControlMinimapActivation);
+        deactivationListener.AddEvent(ControlMinimapActivation);
         minimapRect = GetComponent<RectTransform>();
         miniMapAnim = GetComponent<Animator>(); 
     }
@@ -64,7 +70,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
         SetAnimator();
         SetZoomBoundaries();
 
-        if (Input.GetKeyDown(KeyCode.Tab) && !inMovement)
+        if (Input.GetKeyDown(KeyCode.Tab) && !inMovement && !GameManager.instance.gamePaused)
         {
             initUI = true;
             inMovement = true;
@@ -93,20 +99,23 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
                 SetMiniMapState(buttonSelected);
                 initUI = false;
             }
-            AdjustMinimapScroll();
-            SetFloorUI();
 
-            if (IsInsideMinimapArea())
+            if (!GameManager.instance.gamePaused)
             {
-                if (Input.GetMouseButton(2))
+                AdjustMinimapScroll();
+                SetFloorUI();
+
+                if (IsInsideMinimapArea())
                 {
-                    AdjustMinimapMovement();
+                    if (Input.GetMouseButton(2))
+                    {
+                        AdjustMinimapMovement();
+                    }
                 }
             }
+           
             
-        }
-
-       
+        }      
      
     }
 
@@ -164,8 +173,9 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
         else return false;  
     }
 
-    private void OnActivation()
+    public void ControlMinimapActivation()
     {
+ 
         Cursor.lockState = shouldOpenMap ? CursorLockMode.Locked : CursorLockMode.None;
         shouldOpenMap = !shouldOpenMap;
         if (!shouldOpenMap)
@@ -199,6 +209,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
                 Debug.Log($"Position Before: {position} -- Position After: {finalPosition}");
 
                 playerController.rb.position = finalPosition;
+                SetPlayerLayer("Player");
 
             }
             else
@@ -316,6 +327,14 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
         buttonSelected = index;
         LevelData currentLevelData = GameObject.FindAnyObjectByType<LevelData>();
 
+        if (currentLevelData != null)
+            Debug.Log("Level name:" + currentLevelData.name);
+
+        if (buttonSelected == floorIndex)
+            SetPlayerLayer("Player");
+        else
+            SetPlayerLayer("Hidden");
+
         for (int i = 0; i <= index; i++)
         {
             Debug.Log("Fired");
@@ -331,6 +350,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
        for (int i = index + 1; i < currentLevelData.floors.Count; i++)
         {
+            Debug.Log("Running");
             GameObject floor = currentLevelData.floors[i];
             floor.layer = LayerMask.NameToLayer("Hidden");
             for (int j = 0; j < floor.transform.childCount; j++)
@@ -344,9 +364,10 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
       
     }
 
-    private void SetLayersToDefault()
+    public void SetLayersToDefault()
     {
         LevelData currentLevelData = GameObject.FindAnyObjectByType<LevelData>();
+        SetPlayerLayer("Player");
         for (int i = 0; i < currentLevelData.floors.Count; i++)
         {  
             GameObject floor = currentLevelData.floors[i];
@@ -359,5 +380,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
             }
         }
     }
+
+    private void SetPlayerLayer(string layer) => playerController.body.gameObject.layer = LayerMask.NameToLayer(layer);
 
 }

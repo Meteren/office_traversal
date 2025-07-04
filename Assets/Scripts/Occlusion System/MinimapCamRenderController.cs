@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -38,6 +39,7 @@ public class MinimapCamRenderController : MonoBehaviour
         {
             if (miniMapController.ShouldOpenMap)
             {
+                
                 foreach (var obj in objectsToBeEffected)
                 {
                     obj.GetComponent<Renderer>().material = defaultMaterial;
@@ -45,6 +47,7 @@ public class MinimapCamRenderController : MonoBehaviour
             }
             else
             {
+                Debug.Log("Rendering fade");
                 foreach (var obj in objectsToBeEffected)
                 {
                     obj.GetComponent<Renderer>().material = fadeMaterial;
@@ -65,4 +68,32 @@ public class MinimapCamRenderController : MonoBehaviour
             }
         }
     }
+
+    public void AddObjectsToBeEffected(List<GameObject> objects)
+    {
+        List<Renderer> objectsToAdd = GetRenderers(objects);
+
+        foreach(var o in objectsToAdd)
+        {
+            objectsToBeEffected.Add(o);
+        }
+    }
+    public void RemoveObjectsToBeEffected(List<GameObject> objects)
+    {
+        List<Renderer> objectsToRemove = GetRenderers(objects);
+
+        foreach (var o in objectsToRemove)
+        {
+            objectsToBeEffected.Remove(o);
+        }
+    }
+
+    private List<Renderer> GetRenderers(List<GameObject> objects)
+    {
+        return objects.Select(x =>
+        {
+            return x.TryGetComponent<Renderer>(out Renderer renderer) ? renderer : null;
+        }).Where(x => x).ToList();
+    }
+
 }

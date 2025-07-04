@@ -1451,6 +1451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c249691bbe86244aaab5cb9772325d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 330585545}
   playerController: {fileID: 959837933}
   buildings:
   - {fileID: 6757412061018646944, guid: 976bec92d5e81e743aac0952d0e21c87, type: 3}
@@ -1463,6 +1464,7 @@ MonoBehaviour:
   buttonActivationTime: 0.5
   transitAnim: {fileID: 637917349}
   miniMapCamRendererController: {fileID: 979947390}
+  cameraMovement: {fileID: 330585548}
 --- !u!114 &413637628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3236,7 +3238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pController: {fileID: 959837933}
   miniMapEventListener: {fileID: 1782888840}
-  deactivationListener: {fileID: 0}
+  deactivationListener: {fileID: 1343907631}
   miniMapEnabled: 0
   init: 0
   miniMapCamConstantPosY: 15

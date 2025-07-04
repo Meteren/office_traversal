@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class SelectionScreen : MonoBehaviour
 {
+    [Header("Player Camera")]
+    [SerializeField] private Camera playerCamera;
+
     [Header("Player Controller")]
     [SerializeField] private PlayerController playerController;
 
@@ -25,6 +28,9 @@ public class SelectionScreen : MonoBehaviour
 
     [Header("Minimap Renderer Controller")]
     [SerializeField] private MinimapCamRenderController miniMapCamRendererController;
+
+    [Header("Camera Movement")]
+    [SerializeField] private CameraMovement cameraMovement;
     
     public List<GameObject> Buildings {  get { return buildings; } }
 
@@ -32,6 +38,7 @@ public class SelectionScreen : MonoBehaviour
     private void Update()
     {
         SetButtons();
+        
     }
     public void SelectBuilding(int index)
     {
@@ -92,11 +99,13 @@ public class SelectionScreen : MonoBehaviour
 
     private void Process(GameObject building)
     {
-        Vector3 playerPosition = building.transform.Find("SpawnPoint").transform.position;
         GameObject settedBuilding = Instantiate(building, Vector3.zero, Quaternion.identity);
+        Transform spawnTransform = settedBuilding.transform.Find("SpawnPoint");
         LevelData levelData = settedBuilding.GetComponent<LevelData>();
         miniMapCamRendererController.AddObjectsToBeEffected(levelData.floors);
-        playerController.rb.position = playerPosition;
+        playerController.rb.position = spawnTransform.position;
+        playerCamera.transform.localRotation = Quaternion.Euler(0,0,0);
+        cameraMovement.SetCameraRotation(0,0);
         currentBuilding = settedBuilding;
     }
 

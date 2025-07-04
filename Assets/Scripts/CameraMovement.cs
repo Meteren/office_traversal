@@ -26,7 +26,6 @@ public class CameraMovement : MonoBehaviour
 
     float xRotation;
     float yRotation;
-
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -69,4 +68,11 @@ public class CameraMovement : MonoBehaviour
     }
 
     public void HandleCamera() => canCameraMove = !canCameraMove;
+
+    public void SetCameraRotation(float x, float y)
+    {
+        xRotation = x;
+        yRotation = y;
+    }
+
 }

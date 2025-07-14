@@ -40,8 +40,8 @@ public class CameraMovement : MonoBehaviour
         {
             if (!GameManager.instance.gamePaused)
             {
-                float xAxis = Input.GetAxis("Mouse X");
-                float yAxis = Input.GetAxis("Mouse Y");
+                float xAxis = Input.GetAxisRaw("Mouse X");
+                float yAxis = Input.GetAxisRaw("Mouse Y");
 
                 //Debug.Log($"X-Axis:{xAxis} - Y-Axis:{yAxis}");
 

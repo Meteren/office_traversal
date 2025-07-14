@@ -12,10 +12,6 @@ public class MinimapCamRenderController : MonoBehaviour
     [Header("Objects To Render")]
     [SerializeField] private List<Renderer> objectsToBeEffected;
 
-    [Header("Default Materials")]
-    [SerializeField] private Material fadeMaterial;
-    [SerializeField] private Material defaultMaterial;
-
     [Header("MiniMap Controller")]
     [SerializeField] private MiniMapController miniMapController;
 
@@ -31,7 +27,6 @@ public class MinimapCamRenderController : MonoBehaviour
         RenderPipelineManager.endCameraRendering -= OnEndCameraRendering;
     }
 
-
     private void OnBeginCameraRendering(ScriptableRenderContext context, Camera camera)
     {
 
@@ -42,15 +37,16 @@ public class MinimapCamRenderController : MonoBehaviour
                 
                 foreach (var obj in objectsToBeEffected)
                 {
-                    obj.GetComponent<Renderer>().material = defaultMaterial;
+                    MaterialProvider materialProvider = obj.GetComponent<MaterialProvider>();
+                    obj.GetComponent<Renderer>().material = materialProvider.DefaultMaterial;
                 }
             }
             else
             {
-                Debug.Log("Rendering fade");
                 foreach (var obj in objectsToBeEffected)
                 {
-                    obj.GetComponent<Renderer>().material = fadeMaterial;
+                    MaterialProvider materialProvider = obj.GetComponent<MaterialProvider>();
+                    obj.GetComponent<Renderer>().material = materialProvider.FadeMaterial;
                 }
 
             }
@@ -64,7 +60,13 @@ public class MinimapCamRenderController : MonoBehaviour
         {
             foreach (var obj in objectsToBeEffected)
             {
-                obj.GetComponent<Renderer>().material = defaultMaterial;
+                MaterialProvider materialProvider = obj.GetComponent<MaterialProvider>();
+
+                if (materialProvider != null)
+                {
+                    obj.GetComponent<Renderer>().material = materialProvider.DefaultMaterial;
+                }
+                
             }
         }
     }

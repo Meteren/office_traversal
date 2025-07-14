@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -337,30 +338,39 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
         for (int i = 0; i <= index; i++)
         {
-            Debug.Log("Fired");
-            GameObject floor = currentLevelData.floors[i];
+            GameObject floor = currentLevelData.levelOccludables[i];
             floor.layer = LayerMask.NameToLayer("Default");
             for (int j = 0; j < floor.transform.childCount; j++ )
             {
                 GameObject child = floor.transform.GetChild(j).gameObject;
 
-                child.layer = LayerMask.NameToLayer("Floor");
+                MaterialProvider childProvider = child.GetComponent<MaterialProvider>();
+
+                if (childProvider != null)
+                    if(childProvider.isFloor)
+                        child.gameObject.layer = LayerMask.NameToLayer("Floor");
+
             }
         }
 
-       for (int i = index + 1; i < currentLevelData.floors.Count; i++)
+        for (int i = index + 1; i < currentLevelData.levelOccludables.Count; i++)
         {
-            Debug.Log("Running");
-            GameObject floor = currentLevelData.floors[i];
-            floor.layer = LayerMask.NameToLayer("Hidden");
-            for (int j = 0; j < floor.transform.childCount; j++)
-            {
-                GameObject child = floor.transform.GetChild(j).gameObject;
 
-                child.layer = LayerMask.NameToLayer("Hidden");
+            GameObject levelOccludable = currentLevelData.levelOccludables[i];
+            MaterialProvider floorProvider = levelOccludable.GetComponent<MaterialProvider>();
+            if(floorProvider != null)
+                if(floorProvider.isFloor)
+                    levelOccludable.layer = LayerMask.NameToLayer("Hidden");
+
+            for (int j = 0; j < levelOccludable.transform.childCount; j++)
+            {
+                GameObject child = levelOccludable.transform.GetChild(j).gameObject;
+                MaterialProvider childProvider = child.GetComponent<MaterialProvider>();
+                if (childProvider != null)
+                    if (childProvider.isFloor)
+                        child.gameObject.layer = LayerMask.NameToLayer("Hidden");
             }
         }
-
       
     }
 
@@ -368,15 +378,20 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
     {
         LevelData currentLevelData = GameObject.FindAnyObjectByType<LevelData>();
         SetPlayerLayer("Player");
-        for (int i = 0; i < currentLevelData.floors.Count; i++)
-        {  
-            GameObject floor = currentLevelData.floors[i];
-            floor.layer = LayerMask.NameToLayer("Default");
-            for (int j = 0; j < floor.transform.childCount; j++)
-            {
-                GameObject child = floor.transform.GetChild(j).gameObject;
+        for (int i = 0; i < currentLevelData.levelOccludables.Count; i++)
+        {
+            GameObject levelOccludable = currentLevelData.levelOccludables[i];
+            MaterialProvider floorProvider = levelOccludable.GetComponent<MaterialProvider>();
+            if (floorProvider != null)
+                if (floorProvider.isFloor)
+                    levelOccludable.layer = LayerMask.NameToLayer("Default");
 
-                child.layer = LayerMask.NameToLayer("Default");
+            for (int j = 0; j < levelOccludable.transform.childCount; j++)
+            {
+                GameObject child = levelOccludable.transform.GetChild(j).gameObject;
+                MaterialProvider childProvider = child.GetComponent<MaterialProvider>();
+                if(childProvider.isFloor)
+                    child.layer = LayerMask.NameToLayer("Default");
             }
         }
     }

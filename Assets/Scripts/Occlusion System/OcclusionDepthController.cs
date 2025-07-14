@@ -27,7 +27,8 @@ public class OcclusionDepthController : MonoBehaviour
     private void Update()
     {
         if(!lockExecution)
-            ExecuteOcclusionLogic();    
+            ExecuteOcclusionLogic();
+        Debug.Log($"Objects to be effected count: {occludables.Count}");
     }
 
     private void ExecuteOcclusionLogic()
@@ -54,8 +55,12 @@ public class OcclusionDepthController : MonoBehaviour
     {
         foreach (var occludable in listedOccludables)
         {
-            occludables.Add(occludable);
-            occludable.SetMaterial(isObstructing:true);
+            if (!occludables.Contains(occludable))
+            {
+                occludables.Add(occludable);
+                occludable.SetMaterial(isObstructing: true);
+            }         
+            
         }              
     }
     private void RemoveOccludables(List<OccludableObject> listedOccludables)

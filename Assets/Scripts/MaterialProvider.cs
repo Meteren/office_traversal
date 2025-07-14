@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class MaterialProvider : MonoBehaviour
 {
-    private Material defaultMaterial;
+    [Header("Materials")]
+    [SerializeField] private Material defaultMaterial;
+    [SerializeField] private Material fadeMaterial;
     public Material DefaultMaterial { get { return defaultMaterial; } set { defaultMaterial = value; } }
 
-    void Start()
-    {
-        Renderer renderer = GetComponent<Renderer>();
+    public Material FadeMaterial { get { return fadeMaterial; } set { fadeMaterial = value; } }
 
-        defaultMaterial = renderer.material;   
-    }
+    [Header("Attributes")]
+    public string layer;
+    public bool isFloor;
 
-    
 }

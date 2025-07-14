@@ -79,7 +79,7 @@ public class SelectionScreen : MonoBehaviour
     public void ClearBuilding()
     {
         LevelData levelData = currentBuilding.GetComponent<LevelData>();
-        miniMapCamRendererController.RemoveObjectsToBeEffected(levelData.floors);
+        miniMapCamRendererController.RemoveObjectsToBeEffected(levelData.levelOccludables);
         Destroy(currentBuilding);
     }
 
@@ -102,7 +102,7 @@ public class SelectionScreen : MonoBehaviour
         GameObject settedBuilding = Instantiate(building, Vector3.zero, Quaternion.identity);
         Transform spawnTransform = settedBuilding.transform.Find("SpawnPoint");
         LevelData levelData = settedBuilding.GetComponent<LevelData>();
-        miniMapCamRendererController.AddObjectsToBeEffected(levelData.floors);
+        miniMapCamRendererController.AddObjectsToBeEffected(levelData.levelOccludables);
         playerController.rb.position = spawnTransform.position;
         playerCamera.transform.localRotation = Quaternion.Euler(0,0,0);
         cameraMovement.SetCameraRotation(0,0);

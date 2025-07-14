@@ -6,6 +6,6 @@ public class LevelData : MonoBehaviour
 {
 
     [Header("Floors")]
-    public List<GameObject> floors;
+    public List<GameObject> levelOccludables;
 
 }

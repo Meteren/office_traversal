@@ -92,10 +92,30 @@ public class MinimapCamRenderController : MonoBehaviour
 
     private List<Renderer> GetRenderers(List<GameObject> objects)
     {
+        return objects.SelectMany(x => GetPartsAndItself(x.transform)).ToList();
+    }
+
+    private IEnumerable<Renderer> GetPartsAndItself(Transform transform)
+    {
+        if (transform.TryGetComponent<Renderer>(out Renderer parentRenderer))
+            yield return parentRenderer;
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).TryGetComponent<Renderer>(out Renderer childRenderer))
+            {
+                yield return childRenderer;
+            }
+        }
+
+    }
+    /*
+    private List<Renderer> GetRenderers(List<GameObject> objects)
+    {
         return objects.Select(x =>
         {
             return x.TryGetComponent<Renderer>(out Renderer renderer) ? renderer : null;
         }).Where(x => x).ToList();
-    }
+    }*/
 
 }

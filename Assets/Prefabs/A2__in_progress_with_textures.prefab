@@ -82,7 +82,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 0}
   fadeMaterial: {fileID: 0}
-  layer: Floor
   isFloor: 1
 --- !u!1 &3286226562058065704
 GameObject:
@@ -166,7 +165,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 0}
   fadeMaterial: {fileID: 0}
-  layer: Floor
   isFloor: 1
 --- !u!1 &4782831534853921971
 GameObject:
@@ -250,7 +248,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 0}
   fadeMaterial: {fileID: 0}
-  layer: Floor
   isFloor: 1
 --- !u!1 &5026083960838471779
 GameObject:
@@ -334,7 +331,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 0}
   fadeMaterial: {fileID: 0}
-  layer: Floor
   isFloor: 1
 --- !u!1 &5533891723808091437
 GameObject:
@@ -418,7 +414,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 0}
   fadeMaterial: {fileID: 0}
-  layer: Floor
   isFloor: 1
 --- !u!1 &6010393572198270431
 GameObject:
@@ -567,7 +562,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 0}
   fadeMaterial: {fileID: 0}
-  layer: Floor
   isFloor: 1
 --- !u!1 &8811471282649249025
 GameObject:
@@ -1163,6 +1157,11 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5447331667604542231, guid: f9ea6cdf0bd6b444092c35d34dc9d64c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b9501790d33f8140b0315d52ef96691, type: 2}
     - target: {fileID: 6101380381978759523, guid: f9ea6cdf0bd6b444092c35d34dc9d64c,
         type: 3}
       propertyPath: m_CastShadows
@@ -1693,7 +1692,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &288403237893270912 stripped
 GameObject:
@@ -1737,7 +1735,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 80c00976c7ffa6f41ad7fce1ab2b2f1e, type: 2}
   fadeMaterial: {fileID: 2100000, guid: d04f88fe6f4604848b8d17007cffa11f, type: 2}
-  layer: 
   isFloor: 1
 --- !u!1 &594911926215653548 stripped
 GameObject:
@@ -1794,7 +1791,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &946834977925966027 stripped
 GameObject:
@@ -1851,7 +1847,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &1174690272434008581 stripped
 GameObject:
@@ -2016,7 +2011,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &2600950048282547607 stripped
 GameObject:
@@ -2073,7 +2067,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &2756393618522739186 stripped
 GameObject:
@@ -2130,7 +2123,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!4 &3507972915556363784 stripped
 Transform:
@@ -2193,7 +2185,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &3865087985117709499 stripped
 GameObject:
@@ -2250,7 +2241,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &3880863288602632579 stripped
 GameObject:
@@ -2307,7 +2297,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!4 &4089790160325740277 stripped
 Transform:
@@ -2370,7 +2359,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &4814848305793550678 stripped
 GameObject:
@@ -2427,7 +2415,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &5055403478432047987 stripped
 GameObject:
@@ -2484,7 +2471,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &5098255854615900250 stripped
 GameObject:
@@ -2541,7 +2527,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &5249007496001156508 stripped
 GameObject:
@@ -2598,7 +2583,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &5280823912518932659 stripped
 GameObject:
@@ -2655,7 +2639,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &5313044232093419311 stripped
 GameObject:
@@ -2712,7 +2695,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &6120998228025471338 stripped
 GameObject:
@@ -2769,7 +2751,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &6208322616925197241 stripped
 GameObject:
@@ -2826,7 +2807,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &6328389263570067604 stripped
 GameObject:
@@ -2883,7 +2863,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &7076643263913064743 stripped
 GameObject:
@@ -2967,7 +2946,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &7698329239294652926 stripped
 GameObject:
@@ -3025,7 +3003,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 80c00976c7ffa6f41ad7fce1ab2b2f1e, type: 2}
   fadeMaterial: {fileID: 2100000, guid: d04f88fe6f4604848b8d17007cffa11f, type: 2}
-  layer: 
   isFloor: 1
 --- !u!1 &8064899725871013860 stripped
 GameObject:
@@ -3082,7 +3059,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &8138120275302257304 stripped
 GameObject:
@@ -3139,7 +3115,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &8288319196689983879 stripped
 GameObject:
@@ -3197,7 +3172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 80c00976c7ffa6f41ad7fce1ab2b2f1e, type: 2}
   fadeMaterial: {fileID: 2100000, guid: d04f88fe6f4604848b8d17007cffa11f, type: 2}
-  layer: 
   isFloor: 1
 --- !u!1 &8323085353940713077 stripped
 GameObject:
@@ -3254,7 +3228,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &8801276699276643507 stripped
 GameObject:
@@ -3311,7 +3284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0
 --- !u!1 &9053970377717525739 stripped
 GameObject:
@@ -3368,5 +3340,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 48c8e44ff1c53c24babbcb539f33cb45, type: 2}
   fadeMaterial: {fileID: 2100000, guid: fb5b9e61de54b854aa84bec271098792, type: 2}
-  layer: Climable
   isFloor: 0

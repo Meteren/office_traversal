@@ -42,7 +42,15 @@ public class OcclusionDepthController : MonoBehaviour
             .Select(x =>
             {
                 x.transform.TryGetComponent<OccludableObject>(out var occludable);
-                return occludable;
+                if(occludable != null)
+                {
+                    if (!occludable.isPart)
+                        return occludable;
+                    else
+                        return null;
+        
+                }
+                return occludable;         
             })
             .Where(o => o != null)
             .ToList();

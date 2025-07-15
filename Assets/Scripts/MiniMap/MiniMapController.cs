@@ -355,7 +355,6 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
         for (int i = index + 1; i < currentLevelData.levelOccludables.Count; i++)
         {
-
             GameObject levelOccludable = currentLevelData.levelOccludables[i];
             MaterialProvider floorProvider = levelOccludable.GetComponent<MaterialProvider>();
             if(floorProvider != null)

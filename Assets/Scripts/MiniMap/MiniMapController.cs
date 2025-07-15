@@ -119,7 +119,6 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
         }      
      
     }
-
     private void SetZoomBoundaries()
     {
         offsettedMinSValue = minSValue + playerController.transform.position.y;
@@ -200,14 +199,8 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
                 float bodyHeight = playerController.body.GetComponent<Collider>().bounds.size.y / 2;
                 float playerYOffset = bodyHeight + (playerController.transform.position.y - playerController.body.position.y);
                 Vector3 position = new Vector3(positionToMove.x, positionToMove.y + playerYOffset, positionToMove.z);
-                //Debug.Log($"Final pos: {position}");
 
                 MoveAwayFromObstaclesIfNeeded(position,out Vector3 finalPosition);
-
-                GameObject go = new GameObject("Hit Point");
-                go.transform.position = position;
-
-                Debug.Log($"Position Before: {position} -- Position After: {finalPosition}");
 
                 playerController.rb.position = finalPosition;
                 SetPlayerLayer("Player");
@@ -345,10 +338,15 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
                 GameObject child = floor.transform.GetChild(j).gameObject;
 
                 MaterialProvider childProvider = child.GetComponent<MaterialProvider>();
+                OccludableObject occludableReference = child.GetComponent<OccludableObject>();
 
                 if (childProvider != null)
                     if(childProvider.isFloor)
                         child.gameObject.layer = LayerMask.NameToLayer("Floor");
+
+                if (occludableReference != null)
+                    if (occludableReference.isPart)
+                        child.gameObject.layer = LayerMask.NameToLayer("Default");
 
             }
         }
@@ -357,6 +355,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
         {
             GameObject levelOccludable = currentLevelData.levelOccludables[i];
             MaterialProvider floorProvider = levelOccludable.GetComponent<MaterialProvider>();
+            
             if(floorProvider != null)
                 if(floorProvider.isFloor)
                     levelOccludable.layer = LayerMask.NameToLayer("Hidden");
@@ -365,8 +364,13 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
             {
                 GameObject child = levelOccludable.transform.GetChild(j).gameObject;
                 MaterialProvider childProvider = child.GetComponent<MaterialProvider>();
+                OccludableObject occludableReference = child.GetComponent<OccludableObject>();
                 if (childProvider != null)
                     if (childProvider.isFloor)
+                        child.gameObject.layer = LayerMask.NameToLayer("Hidden");
+
+                if(occludableReference != null)
+                    if(occludableReference.isPart)
                         child.gameObject.layer = LayerMask.NameToLayer("Hidden");
             }
         }

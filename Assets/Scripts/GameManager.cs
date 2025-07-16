@@ -16,12 +16,16 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector] public bool isStarted;
 
+    [Header("Cursor Texture")]
+    [SerializeField] private Texture2D cursorTex;
+
    
 
     private void Start()
     {
         gameStateListener.AddEvent(SetCursorState);
         InitStartState();
+        Cursor.SetCursor(cursorTex, Vector2.zero, CursorMode.Auto);
     }
 
     public void SetCursorState() => Cursor.lockState = gamePaused ? CursorLockMode.None : CursorLockMode.Locked;

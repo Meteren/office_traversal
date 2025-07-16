@@ -52,7 +52,6 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
     [Header("Floor Control Section")]
     [SerializeField] private List<Button> floorButtons;
-    [SerializeField] private OcclusionDepthController occlusionDepthController;
     public int floorIndex;
 
 
@@ -91,6 +90,9 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
         SetButtonsState(shouldOpenMap);
 
+        foreach (var element in UIManager.instance.mapIcons)
+            element.gameObject.SetActive(shouldOpenMap);
+
         if (shouldOpenMap)
         {
             if (initUI)
@@ -108,7 +110,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
                 if (IsInsideMinimapArea())
                 {
-                    if (Input.GetMouseButton(2))
+                    if (Input.GetMouseButton(1))
                     {
                         AdjustMinimapMovement();
                     }
@@ -186,11 +188,8 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
     {    
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(minimapRect, eventData.position, null, out localPoint);
-        //Debug.Log($"Clicked: {localPoint}");
 
         Vector2 clickPosition = GetMinimapCamClickPos(localPoint);
-
-        //Debug.Log($"Click Position:{clickPosition}");
 
         if (Input.GetMouseButtonDown(0)) 
         {
@@ -230,7 +229,6 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layersToHit, QueryTriggerInteraction.Collide))
         {
-            //Debug.Log($"Ray hitted on position:{hit.point}");
             if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Floor"))
             {
                 positionToMove = hit.point;

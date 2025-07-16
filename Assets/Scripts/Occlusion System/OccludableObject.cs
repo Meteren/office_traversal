@@ -34,7 +34,6 @@ public class OccludableObject : MonoBehaviour
         else
         {
             block.SetFloat("_AlphaValue", alphaValue);
-            Debug.Log($"A part:{gameObject.name} - {alphaValue}");
         }
             
             

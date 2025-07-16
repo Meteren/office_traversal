@@ -533,8 +533,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 47.04073, y: 0.6166229, z: 10.712781}
-  m_Center: {x: -23.858957, y: 0.1916889, z: -3.5523307}
+  m_Size: {x: 47.04073, y: 0.8077383, z: 10.712781}
+  m_Center: {x: -23.858957, y: 0.098499775, z: -3.5523305}
 --- !u!114 &4378909665086903195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,7 +1677,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &7743567174329596815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1776,7 +1778,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &8494148030835996251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1832,7 +1836,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &8135400603243247347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1996,7 +2002,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &3248825680626608924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2052,7 +2060,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &512717235248879729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2108,7 +2118,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &4605142656334428643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2170,7 +2182,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &1928099262959848701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2226,7 +2240,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &7989166863455677022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2282,7 +2298,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &7190063159766354359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2344,7 +2362,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &6643831822086155468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2400,7 +2420,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &3521424281193950795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2456,7 +2478,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &2863611864651447779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2512,7 +2536,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &762164172747275421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2568,7 +2594,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &750270030841201208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2624,7 +2652,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &3231335561300928011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2680,7 +2710,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &8610338188102372639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2736,7 +2768,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &1747420446286503338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2792,7 +2826,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &4133216333378576330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2848,7 +2884,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &477443670009396373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2931,7 +2969,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &5227083869558647994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2988,7 +3028,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &5019648581594343963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3044,7 +3086,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &1654383229375880090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3100,7 +3144,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &6333713674864495708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3157,7 +3203,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &2388814589682206048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3213,7 +3261,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &6122338586809783541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3269,7 +3319,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &4854384166364499423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3325,7 +3377,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 2
+  alphaValue: 1
   clipShadows: 0
+  isPart: 0
 --- !u!114 &6664908369533486563
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +10,9 @@ public class UIManager : Singleton<UIManager>
 
     [Header("Selection Screen")]
     public GameObject selectionScreen;
+
+    [Header("Info Panel")]
+    public InfoPanel infoPanel;
 
     [Header("Text Timer")]
     [SerializeField] private float timer;
@@ -25,9 +29,12 @@ public class UIManager : Singleton<UIManager>
     [Header("Map Deactivation Listener On Select Screen")]
     [SerializeField] private EventListener deactivationListener;
 
+    [Header("Map Icons")]
+    [SerializeField] public List<GameObject> mapIcons;
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !miniMapController.inMovement)
+        if (Input.GetKeyDown(KeyCode.LeftAlt) && !miniMapController.inMovement)
         {
                      
             GameManager.instance.gamePaused = !GameManager.instance.gamePaused;

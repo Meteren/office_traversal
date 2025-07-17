@@ -45,8 +45,10 @@ public class CameraMovement : MonoBehaviour
                 float xAxis = Input.GetAxisRaw("Mouse X");
                 float yAxis = Input.GetAxisRaw("Mouse Y");
 
-                xAxis = Mathf.Clamp(xAxis,-5,5);
-                yAxis = Mathf.Clamp(yAxis, -5, 5);
+#if UNITY_WEBGL
+                xAxis = Mathf.Clamp(xAxis,-2,2);
+                yAxis = Mathf.Clamp(yAxis, -2, 2);
+#endif
 
                 //Debug.Log($"X-Axis:{xAxis} - Y-Axis:{yAxis}");
 

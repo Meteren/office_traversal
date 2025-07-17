@@ -23,9 +23,9 @@ public class ButtonDescriptionController : MonoBehaviour
    
     void Update()
     {
-        if (panelActive)
+        if (panelActive )
         {
-            if (CheckIfInBoundaries())
+            if (CheckIfInBoundaries() && Cursor.lockState == CursorLockMode.None)
             {
                 if (!panel.gameObject.activeSelf)
                     panel.OpenPanel(buttonDescription,this);

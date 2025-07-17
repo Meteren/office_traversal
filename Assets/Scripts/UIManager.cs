@@ -32,6 +32,7 @@ public class UIManager : Singleton<UIManager>
     [Header("Map Icons")]
     [SerializeField] public List<GameObject> mapIcons;
 
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftAlt) && !miniMapController.inMovement)

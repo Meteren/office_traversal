@@ -44,7 +44,7 @@ public class GameManager : Singleton<GameManager>
     private void Quit()
     {
     #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
     #else
         Application.Quit();
     #endif

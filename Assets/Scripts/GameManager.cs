@@ -18,14 +18,19 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Cursor Texture")]
     [SerializeField] private Texture2D cursorTex;
-
-   
+ 
 
     private void Start()
     {
         gameStateListener.AddEvent(SetCursorState);
         InitStartState();
-        Cursor.SetCursor(cursorTex, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(cursorTex, new Vector2(8,8), CursorMode.Auto);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Q))
+           Quit();
     }
 
     public void SetCursorState() => Cursor.lockState = gamePaused ? CursorLockMode.None : CursorLockMode.Locked;
@@ -34,6 +39,15 @@ public class GameManager : Singleton<GameManager>
     {
         selectionScreen.SetBuilding(selectionScreen.Buildings[0]);
         isStarted = true;
+    }
+
+    private void Quit()
+    {
+    #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+    #else
+        Application.Quit();
+    #endif
     }
 
 }

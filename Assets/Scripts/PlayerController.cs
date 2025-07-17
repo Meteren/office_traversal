@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     List<Vector3> directions;
     void Start()
     {
+        
         directions = new List<Vector3>() {transform.TransformDirection(0,0,1),
             transform.TransformDirection(-0.7f,0,0.7f),transform.TransformDirection(0.7f,0,0.7f),transform.TransformDirection(-1,0,0),
             transform.TransformDirection(-0.7f,0,-0.7f),transform.TransformDirection(0,0,-1),transform.TransformDirection(0.7f,0,-0.7f),

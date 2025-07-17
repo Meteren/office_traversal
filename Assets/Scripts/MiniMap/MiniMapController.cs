@@ -77,6 +77,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
             MiniMapCam miniMC = miniMapCam.GetComponent<MiniMapCam>();
             miniMC.MiniMapCamConstantPosY = miniMapCam.transform.position.y;    
             miniMapEventListener.eventController.ExecuteListeners();
+            UIManager.instance.infoPanel.gameObject.SetActive(false);
         }
 
         AnimatorStateInfo stateInfo = miniMapAnim.GetCurrentAnimatorStateInfo(0);

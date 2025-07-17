@@ -24,6 +24,8 @@ public class CameraMovement : MonoBehaviour
     [Header("Map Deactivation Listener On Select Screen")]
     [SerializeField] private EventListener deactivationListener;
 
+    Vector3 lastMousePosition;
+
     float xRotation;
     float yRotation;
     private void Start()
@@ -43,6 +45,9 @@ public class CameraMovement : MonoBehaviour
                 float xAxis = Input.GetAxisRaw("Mouse X");
                 float yAxis = Input.GetAxisRaw("Mouse Y");
 
+                xAxis = Mathf.Clamp(xAxis,-5,5);
+                yAxis = Mathf.Clamp(yAxis, -5, 5);
+
                 //Debug.Log($"X-Axis:{xAxis} - Y-Axis:{yAxis}");
 
                 xRotation += -1 * yAxis * sensitivity;
@@ -56,7 +61,10 @@ public class CameraMovement : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
 
                 player.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+
+                
             }
+
            
         }    
         

@@ -18,6 +18,9 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Cursor Texture")]
     [SerializeField] private Texture2D cursorTex;
+
+    [Header("Minimap Controller")]
+    public MiniMapController miniMapController;
  
 
     private void Start()

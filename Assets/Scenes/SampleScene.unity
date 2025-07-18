@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.6591187, y: 33}
+  m_AnchoredPosition: {x: -1.6591797, y: 33}
   m_SizeDelta: {x: 36.4977, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &473551
@@ -1915,8 +1915,8 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 47.197075, y: 9.812905, z: 7.8996935}
-  m_BoxOffset: {x: -7.475772, y: 0.093547344, z: -0.82263136}
+  m_BoxSize: {x: 48.789963, y: 9.812905, z: 7.8996935}
+  m_BoxOffset: {x: -6.67933, y: 0.093547344, z: -0.82263136}
   m_NearClip: 0.3
   m_FarClip: 1000
   m_ShadowDistance: 100
@@ -2205,7 +2205,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637917347}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2401,8 +2401,8 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 6.926399, y: 6.3763523, z: 11.062945}
-  m_BoxOffset: {x: -0.008207321, y: -1.227745, z: -0.030801296}
+  m_BoxSize: {x: 6.926399, y: 6.3763523, z: 11.410248}
+  m_BoxOffset: {x: -0.008207321, y: -1.227745, z: 0.14285016}
   m_NearClip: 0.3
   m_FarClip: 1000
   m_ShadowDistance: 100
@@ -2729,7 +2729,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 637917348}
   - {fileID: 1778211568}
   - {fileID: 476740561}
   - {fileID: 235151371}
@@ -2743,6 +2742,7 @@ RectTransform:
   - {fileID: 263362122}
   - {fileID: 567322425}
   - {fileID: 1186974459}
+  - {fileID: 637917348}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3066,8 +3066,8 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 8.620285, y: 10, z: 11.366905}
-  m_BoxOffset: {x: -0.5946388, y: 0, z: -0.88961315}
+  m_BoxSize: {x: 8.620285, y: 10, z: 12.095404}
+  m_BoxOffset: {x: -0.5946388, y: 0, z: -0.5253639}
   m_NearClip: 0.3
   m_FarClip: 1000
   m_ShadowDistance: 100
@@ -3131,8 +3131,8 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 7.5236034, y: 6.3763523, z: 11.428384}
-  m_BoxOffset: {x: -0.1360445, y: -1.227745, z: 0.15191793}
+  m_BoxSize: {x: 7.5236034, y: 6.3763523, z: 11.838645}
+  m_BoxOffset: {x: -0.1360445, y: -1.227745, z: 0.3570485}
   m_NearClip: 0.3
   m_FarClip: 1000
   m_ShadowDistance: 100
@@ -3263,7 +3263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.6591187, y: -2130}
+  m_AnchoredPosition: {x: -1.6591797, y: -2130}
   m_SizeDelta: {x: 36.498, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &830183548
@@ -3573,7 +3573,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2551
+    m_Bits: 3575
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 8cfb34233ebeed24bacf3f9a2568f114, type: 2}
   m_TargetDisplay: 0
@@ -4261,8 +4261,8 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 512
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 40.648464, y: 8.168693, z: 8.062022}
-  m_BoxOffset: {x: -3.5572147, y: -0.9156537, z: 0.2350173}
+  m_BoxSize: {x: 41.11173, y: 8.168693, z: 8.062022}
+  m_BoxOffset: {x: -3.788847, y: -0.9156537, z: 0.2350173}
   m_NearClip: 0.3
   m_FarClip: 1000
   m_ShadowDistance: 100
@@ -5421,8 +5421,8 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 6.926399, y: 6.3763523, z: 11.062945}
-  m_BoxOffset: {x: -0.008207321, y: -1.227745, z: -0.030801296}
+  m_BoxSize: {x: 6.926399, y: 6.3763523, z: 11.467773}
+  m_BoxOffset: {x: -0.008207321, y: -1.227745, z: 0.17161274}
   m_NearClip: 0.3
   m_FarClip: 1000
   m_ShadowDistance: 100
@@ -5685,7 +5685,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110.515015, y: -166.71692}
+  m_AnchoredPosition: {x: 110.51514, y: -166.71692}
   m_SizeDelta: {x: 66.5029, y: 51.0742}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1442801719
@@ -6245,6 +6245,7 @@ MonoBehaviour:
   selectionScreen: {fileID: 413637627}
   isStarted: 0
   cursorTex: {fileID: 2800000, guid: e2610eafc3373fc459732a497a9eef91, type: 3}
+  miniMapController: {fileID: 1778211572}
 --- !u!4 &1613785305
 Transform:
   m_ObjectHideFlags: 0
@@ -6810,7 +6811,7 @@ MonoBehaviour:
   miniMapCam: {fileID: 871809985}
   layersToHit:
     serializedVersion: 2
-    m_Bits: 2551
+    m_Bits: 3575
   playerController: {fileID: 959837933}
   miniMapEventListener: {fileID: 1782888840}
   deactivationListener: {fileID: 1343907631}
@@ -6971,8 +6972,8 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 512
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 47.729225, y: 9.469199, z: 8.062022}
-  m_BoxOffset: {x: 2.370345, y: -0.2654004, z: 0.2350173}
+  m_BoxSize: {x: 49.274643, y: 9.469199, z: 8.062022}
+  m_BoxOffset: {x: 3.143054, y: -0.2654004, z: 0.2350173}
   m_NearClip: 0.3
   m_FarClip: 1000
   m_ShadowDistance: 100
@@ -7385,8 +7386,8 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 7.362423, y: 6.3763523, z: 11.062945}
-  m_BoxOffset: {x: -0.25465584, y: -1.227745, z: -0.030801296}
+  m_BoxSize: {x: 7.362423, y: 6.3763523, z: 11.792849}
+  m_BoxOffset: {x: -0.25465584, y: -1.227745, z: 0.3341503}
   m_NearClip: 0.3
   m_FarClip: 1000
   m_ShadowDistance: 100
@@ -7682,7 +7683,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110.7616, y: -89}
+  m_AnchoredPosition: {x: 110.76172, y: -89}
   m_SizeDelta: {x: 102.5014, y: 46.508}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2033222593

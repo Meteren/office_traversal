@@ -12,7 +12,7 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
     int buttonSelected;
 
     [Header("Conditions")]
-    [SerializeField] private bool shouldOpenMap;
+    public bool shouldOpenMap;
     public bool inMovement;
     [SerializeField] private bool initUI;
 
@@ -344,8 +344,22 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
                         child.gameObject.layer = LayerMask.NameToLayer("Floor");
 
                 if (occludableReference != null)
-                    if (occludableReference.isPart)
-                        child.gameObject.layer = LayerMask.NameToLayer("Default");
+                {
+                    if(occludableReference.gameObject.layer != LayerMask.NameToLayer("Furniture"))
+                    {
+                        if (occludableReference.isPart)
+                            child.gameObject.layer = LayerMask.NameToLayer("Default");
+                    }
+                    if(occludableReference.gameObject.layer == LayerMask.NameToLayer("Furniture"))
+                    {
+                        Debug.Log("Furniture activated");
+                        occludableReference.SetState(true);
+                    }
+                        
+                    
+                }
+                    
+                
 
             }
         }
@@ -369,8 +383,20 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
                         child.gameObject.layer = LayerMask.NameToLayer("Hidden");
 
                 if(occludableReference != null)
-                    if(occludableReference.isPart)
-                        child.gameObject.layer = LayerMask.NameToLayer("Hidden");
+                {
+                    if (occludableReference.gameObject.layer != LayerMask.NameToLayer("Furniture"))
+                    {
+                        if (occludableReference.isPart)
+                            child.gameObject.layer = LayerMask.NameToLayer("Hidden");
+                    }
+                    if (occludableReference.gameObject.layer == LayerMask.NameToLayer("Furniture"))
+                    {
+                        Debug.Log("Furniture deactivated");
+                        occludableReference.SetState(false);
+                    }
+                        
+                }
+                    
             }
         }
       
@@ -392,8 +418,9 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
             {
                 GameObject child = levelOccludable.transform.GetChild(j).gameObject;
                 MaterialProvider childProvider = child.GetComponent<MaterialProvider>();
-                if(childProvider.isFloor)
-                    child.layer = LayerMask.NameToLayer("Default");
+                if(childProvider != null)
+                    if(childProvider.isFloor)
+                        child.layer = LayerMask.NameToLayer("Default");
             }
         }
     }

@@ -26,8 +26,12 @@ public class OcclusionDepthController : MonoBehaviour
     }
     private void Update()
     {
-        if(!lockExecution)
+        if (!lockExecution)
+        {
             ExecuteOcclusionLogic();
+            Debug.Log("Working");
+        }
+            
         Debug.Log($"Objects to be effected count: {occludables.Count}");
     }
 

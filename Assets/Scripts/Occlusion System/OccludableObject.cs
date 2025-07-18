@@ -25,22 +25,23 @@ public class OccludableObject : MonoBehaviour
     }
     private void Update()
     {
-        MaterialPropertyBlock block = new MaterialPropertyBlock();
-
-        objectRenderer.GetPropertyBlock(block);
-
-        if (!isPart)
-            block.SetFloat("_AlphaValue", GetAlphaValue(isObstructing));
-        else
+        if(gameObject.layer != LayerMask.NameToLayer("Furniture"))
         {
-            block.SetFloat("_AlphaValue", alphaValue);
-        }
-            
-            
-        
-        block.SetInt("_ClipShadows", Convert.ToInt32(clipShadows));
+            MaterialPropertyBlock block = new MaterialPropertyBlock();
 
-        objectRenderer.SetPropertyBlock(block);
+            objectRenderer.GetPropertyBlock(block);
+
+            if (!isPart)
+                block.SetFloat("_AlphaValue", GetAlphaValue(isObstructing));
+            else
+            {
+                block.SetFloat("_AlphaValue", alphaValue);
+            }
+
+            block.SetInt("_ClipShadows", Convert.ToInt32(clipShadows));
+
+            objectRenderer.SetPropertyBlock(block);
+        }  
 
     }
 
@@ -69,14 +70,31 @@ public class OccludableObject : MonoBehaviour
                 Debug.Log($"Children: {occludableObject.gameObject.name}");
 
                 if (isObstructing)
-                    occludableObject.alphaValue -= Time.deltaTime * fadeSpeed;
+                {
+                    if (occludableObject.gameObject.layer == LayerMask.NameToLayer("Furniture"))
+                        if(!GameManager.instance.miniMapController.shouldOpenMap)
+                            occludableObject.SetState(false);
+                    else
+                        occludableObject.alphaValue -= Time.deltaTime * fadeSpeed;
+                }
                 else
-                    occludableObject.alphaValue += Time.deltaTime * fadeSpeed;
-
+                {
+                    if (occludableObject.gameObject.layer == LayerMask.NameToLayer("Furniture"))
+                    {
+                        if (!GameManager.instance.miniMapController.shouldOpenMap)
+                            occludableObject.SetState(true);
+                    }
+                    else
+                        occludableObject.alphaValue += Time.deltaTime * fadeSpeed;
+                     
+                }
+                   
                 occludableObject.alphaValue = Mathf.Clamp01(alphaValue);
 
             }
         }
 
     }
+
+    public void SetState(bool state) => gameObject.SetActive(state);
 }

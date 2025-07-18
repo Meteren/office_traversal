@@ -29,6 +29,9 @@ public class CameraMovement : MonoBehaviour
     [Header("Sensitivity Controller")]
     [SerializeField] private Slider sSlider;
 
+    [Header("Mouse Delta Adjuster")]
+    [SerializeField] private Slider dAdjuster;
+
     float xRotation;
     float yRotation;
     private void Start()
@@ -49,10 +52,26 @@ public class CameraMovement : MonoBehaviour
             if (!GameManager.instance.gamePaused)
             {
 
+
+#if UNITY_WEBGL
+                float deltaX = Input.GetAxisRaw("Mouse X");
+                float deltaY = Input.GetAxisRaw("Mouse Y");
+
+                deltaX = Mathf.Clamp(deltaX,-2,2);
+                deltaY = Mathf.Clamp(deltaY, -2, 2);
+
+                xRotation += -1 * deltaY * sensitivity;
+                xRotation = ClampXAxis(xRotation);
+                yRotation += deltaX * sensitivity;
+
+                transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
+
+                player.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+#else
+
                 Vector2 mouseDelta = Mouse.current.delta.ReadValue();
-
+      
                 xRotation += -1 * mouseDelta.y * sensitivity;
-
                 xRotation = ClampXAxis(xRotation);
 
                 yRotation += mouseDelta.x * sensitivity;
@@ -60,11 +79,9 @@ public class CameraMovement : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
 
                 player.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-
+#endif
 
             }
-
-
         }
     }
 

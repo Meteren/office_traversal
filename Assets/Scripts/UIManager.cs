@@ -41,7 +41,7 @@ public class UIManager : Singleton<UIManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !miniMapController.inMovement && !sScreen.inittedLevelChange)
+        if (Input.GetKeyDown(KeyCode.R) && !miniMapController.inMovement && !sScreen.inittedLevelChange)
         {
                      
             GameManager.instance.gamePaused = !GameManager.instance.gamePaused;

@@ -51,7 +51,6 @@ public class InfoPanel : MonoBehaviour
     {
         for(int i = 0; i < buttons.Length; i++)
         {
-            Debug.Log($"Button name: {buttons[i].name}");
             if (buttons[i] == button)
                 buttons[i].panelActive = true;
             else

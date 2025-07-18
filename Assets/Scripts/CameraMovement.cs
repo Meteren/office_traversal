@@ -51,11 +51,7 @@ public class CameraMovement : MonoBehaviour
 
                 Vector2 mouseDelta = Mouse.current.delta.ReadValue();
 
-                //Debug.Log($"X-Axis:{xAxis} - Y-Axis:{yAxis}");
-
                 xRotation += -1 * mouseDelta.y * sensitivity;
-
-                //Debug.Log($"x angle:{xRotation}");
 
                 xRotation = ClampXAxis(xRotation);
 

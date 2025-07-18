@@ -99,7 +99,6 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
             if (initUI)
             {
                 buttonSelected = floorIndex;
-                Debug.Log($"Button index:{buttonSelected}");
                 SetMiniMapState(buttonSelected);
                 initUI = false;
             }
@@ -153,13 +152,9 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
             miniMapCamPos.y, miniMapCamPos.z -= directionZ * traversalSpeed);
 
         Vector3 boundaryCenter = boundary.transform.position;
-        //Debug.Log($"Boundary Center Position:{boundaryCenter}");
         Vector3 bounds = boundary.size;
-        Debug.Log($"Boundary Size:{bounds} ");
         Vector2 xAxis = new Vector2(boundaryCenter.x + bounds.x / 2, boundaryCenter.x - bounds.x / 2);
         Vector2 zAxis = new Vector2(boundaryCenter.z + bounds.z / 2, boundaryCenter.z - bounds.z / 2);
-
-        Debug.Log($"xAxis: {xAxis} - yAxis: {zAxis}");
 
         movementVector.x = Mathf.Clamp(movementVector.x, xAxis.y, xAxis.x);
         movementVector.z = Mathf.Clamp(movementVector.z, zAxis.y, zAxis.x);
@@ -261,23 +256,18 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
 
         foreach(var direction in directions)
         {
-            Debug.Log($"Direction: {direction}");
             Ray ray = new Ray(positionBefore, direction);
             VisualizeRay(positionBefore, direction);
             if (Physics.Raycast(ray,out RaycastHit hit, radius, rayLayer, QueryTriggerInteraction.Ignore))
             {
-                Debug.Log("Obstacle Detected");
                 float delta = radius - hit.distance;
-                Debug.Log($"Hit Delta: {delta}");
                 if(direction.z == 0)
                 {
-                    Debug.Log("X obstacle");
                     finalPosition -= new Vector3(delta * (direction.x > 0 ? 1 : -1), 0, 0);
                 }                 
                                             
                 if(direction.x == 0)
                 {
-                    Debug.Log("Z obstacle");
                     finalPosition -= new Vector3(0, 0, delta * (direction.z > 0 ? 1 : -1));
                 }
                     
@@ -320,9 +310,6 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
         buttonSelected = index;
         LevelData currentLevelData = GameObject.FindAnyObjectByType<LevelData>();
 
-        if (currentLevelData != null)
-            Debug.Log("Level name:" + currentLevelData.name);
-
         if (buttonSelected == floorIndex)
             SetPlayerLayer("Player");
         else
@@ -351,16 +338,11 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
                             child.gameObject.layer = LayerMask.NameToLayer("Default");
                     }
                     if(occludableReference.gameObject.layer == LayerMask.NameToLayer("Furniture"))
-                    {
-                        Debug.Log("Furniture activated");
                         occludableReference.SetState(true);
-                    }
-                        
-                    
-                }
-                    
-                
 
+                           
+                }       
+                
             }
         }
 
@@ -391,7 +373,6 @@ public class MiniMapController : MonoBehaviour, IPointerDownHandler
                     }
                     if (occludableReference.gameObject.layer == LayerMask.NameToLayer("Furniture"))
                     {
-                        Debug.Log("Furniture deactivated");
                         occludableReference.SetState(false);
                     }
                         

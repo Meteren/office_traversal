@@ -67,7 +67,6 @@ public class OccludableObject : MonoBehaviour
         {
             if (transform.GetChild(i).TryGetComponent<OccludableObject>(out OccludableObject occludableObject))
             {
-                Debug.Log($"Children: {occludableObject.gameObject.name}");
 
                 if (isObstructing)
                 {

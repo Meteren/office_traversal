@@ -13,7 +13,6 @@ public class FloorPassage : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log($"Stay{floorIndex}");
         miniMapController.floorIndex = floorIndex;
     }
 

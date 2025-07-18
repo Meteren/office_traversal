@@ -20,7 +20,6 @@ public class MoveState : BasePlayerState
     public override void Update()
     {
         base.Update();
-        Debug.Log("Move State");
         zDirection = Input.GetAxisRaw("Vertical");
         xDirection = Input.GetAxisRaw("Horizontal");   
 

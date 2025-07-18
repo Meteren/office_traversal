@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -24,7 +26,8 @@ public class CameraMovement : MonoBehaviour
     [Header("Map Deactivation Listener On Select Screen")]
     [SerializeField] private EventListener deactivationListener;
 
-    Vector3 lastMousePosition;
+    [Header("Sensitivity Controller")]
+    [SerializeField] private Slider sSlider;
 
     float xRotation;
     float yRotation;
@@ -38,38 +41,35 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
+
+        sSlider.gameObject.SetActive(GameManager.instance.gamePaused);
+        sensitivity = sSlider.value;
         if (canCameraMove)
         {
             if (!GameManager.instance.gamePaused)
             {
-                float xAxis = Input.GetAxisRaw("Mouse X");
-                float yAxis = Input.GetAxisRaw("Mouse Y");
 
-#if UNITY_WEBGL
-                xAxis = Mathf.Clamp(xAxis,-2,2);
-                yAxis = Mathf.Clamp(yAxis, -2, 2);
-#endif
+                Vector2 mouseDelta = Mouse.current.delta.ReadValue();
 
                 //Debug.Log($"X-Axis:{xAxis} - Y-Axis:{yAxis}");
 
-                xRotation += -1 * yAxis * sensitivity;
+                xRotation += -1 * mouseDelta.y * sensitivity;
 
                 //Debug.Log($"x angle:{xRotation}");
 
                 xRotation = ClampXAxis(xRotation);
 
-                yRotation += xAxis * sensitivity;
+                yRotation += mouseDelta.x * sensitivity;
 
                 transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
 
                 player.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
-                
+
             }
 
-           
-        }    
-        
+
+        }
     }
 
     private float ClampXAxis(float x)

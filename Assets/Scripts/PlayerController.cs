@@ -55,7 +55,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         playerStateMachine.Update();
-        if(rb.velocity != Vector3.zero)
+        
+    }
+
+    private void FixedUpdate()
+    {
+       
+        if (rb.velocity != Vector3.zero)
             ClimbIfPossible();
     }
 
@@ -97,6 +103,10 @@ public class PlayerController : MonoBehaviour
     }
     private void VisualizeDirection(Vector3 origin, Vector3 direction,float distance) => Debug.DrawRay(origin, direction * distance);
 
-    private void ClimbObstacle() =>
-        rb.position = new Vector3(transform.position.x, transform.position.y + climbPower, transform.position.z);
+    private void ClimbObstacle()
+    {
+        rb.MovePosition(rb.position + new Vector3(0, climbPower * Time.fixedDeltaTime, 0));
+        
+    }
+       
 }

@@ -32,10 +32,16 @@ public class UIManager : Singleton<UIManager>
     [Header("Map Icons")]
     [SerializeField] public List<GameObject> mapIcons;
 
+    private SelectionScreen sScreen;
+
+    private void Start()
+    {
+        sScreen = selectionScreen.GetComponent<SelectionScreen>();    
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt) && !miniMapController.inMovement)
+        if (Input.GetKeyDown(KeyCode.LeftAlt) && !miniMapController.inMovement && !sScreen.inittedLevelChange)
         {
                      
             GameManager.instance.gamePaused = !GameManager.instance.gamePaused;
@@ -56,7 +62,6 @@ public class UIManager : Singleton<UIManager>
         }
        
     }
-
     public void ShowIndicator(string text)
     {
         StartCoroutine(Timer(text));

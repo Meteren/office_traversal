@@ -31,6 +31,8 @@ public class SelectionScreen : MonoBehaviour
 
     [Header("Camera Movement")]
     [SerializeField] private CameraMovement cameraMovement;
+
+    [HideInInspector] public bool inittedLevelChange;
     
     public List<GameObject> Buildings {  get { return buildings; } }
 
@@ -53,7 +55,6 @@ public class SelectionScreen : MonoBehaviour
         }
             
     }
-
     private void SetButtons()
     {
         for(int i = 0; i < buttons.Count; i++)
@@ -87,12 +88,14 @@ public class SelectionScreen : MonoBehaviour
     {
         HandleButtons(false);
         transitAnim.SetBool("transit", true);
+        inittedLevelChange = true;
         yield return new WaitForSeconds(levelLoadTime);
         ClearBuilding();
         Process(building);
         yield return new WaitForSeconds(levelLoadTime);
         transitAnim.SetBool("transit",false);
         yield return new WaitForSeconds(buttonActivationTime);
+        inittedLevelChange = false;
         HandleButtons(true);
 
     }
@@ -108,7 +111,6 @@ public class SelectionScreen : MonoBehaviour
         cameraMovement.SetCameraRotation(0,0);
         currentBuilding = settedBuilding;
     }
-
     private void HandleButtons(bool shouldActivate)
     {
         foreach(var b in buttons)
